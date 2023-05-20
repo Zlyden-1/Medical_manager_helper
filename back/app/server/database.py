@@ -1,16 +1,20 @@
+import asyncio
+
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 
-MONGO_DETAILS = "mongodb://mongodb:27017"
+MONGO_DETAILS = "mongodb://localhost:27017"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
 database = client.diagnosis
 
-diagnosis_collection = database.get_collection("diagnosis_collection")
+rated_diagnosis_collection = database.get_collection("rated_diagnosis_collection")
+
+diagnosis_standard_collection = database.get_collection("diagnosis_standard_collection")
 
 
-def diagnosis_helper(diagnosis) -> dict:
+def diagnosis_standard_helper(diagnosis) -> dict:
     return {
         "id": str(diagnosis["_id"]),
         "name": diagnosis["name"],
@@ -19,46 +23,81 @@ def diagnosis_helper(diagnosis) -> dict:
     }
 
 
+def rated_diagnosis_helper(diagnosis) -> dict:
+    return {
+        "id": str(diagnosis["_id"]),
+        "name": diagnosis["name"],
+        "speciality": diagnosis["speciality"],
+        "prescriptions": diagnosis["prescriptions"],
+        "extra_prescriptions": diagnosis["extra_prescriptions"],
+        "code": diagnosis["code"],
+        "doctor_name": diagnosis["doctor_name"],
+        "protocol_name": diagnosis["protocol_name"],
+        "upload_date": diagnosis["upload_date"],
+    }
+
+
 # Retrieve all students present in the database
-async def retrieve_diagnoses():
+async def retrieve_rated_diagnoses():
     diagnoses = []
-    async for diagnosis in diagnosis_collection.find():
-        diagnoses.append(diagnosis_helper(diagnosis))
+    async for diagnosis in rated_diagnosis_collection.find():
+        diagnoses.append(rated_diagnosis_helper(diagnosis))
+    return diagnoses
+
+
+async def retrieve_diagnosis_standards():
+    diagnoses = []
+    async for diagnosis in diagnosis_standard_collection.find():
+        diagnoses.append(diagnosis_standard_helper(diagnosis))
     return diagnoses
 
 
 # Add a new student into to the database
-async def add_diagnosis(diagnosis_data: dict) -> dict:
-    diagnosis = await diagnosis_collection.insert_one(diagnosis_data)
-    new_student = await diagnosis_collection.find_one({"_id": diagnosis.inserted_id})
-    return diagnosis_helper(new_student)
+async def add_rated_diagnosis(diagnosis_data: dict) -> dict:
+    diagnosis = await rated_diagnosis_collection.insert_one(diagnosis_data)
+    new_diagnosis = await rated_diagnosis_collection.find_one({"_id": diagnosis.inserted_id})
+    return rated_diagnosis_helper(new_diagnosis)
+
+
+async def add_diagnosis_standard(diagnosis_data: dict) -> dict:
+    diagnosis = await diagnosis_standard_collection.insert_one(diagnosis_data)
+    new_diagnosis = await diagnosis_standard_collection.find_one({"_id": diagnosis.inserted_id})
+    return diagnosis_standard_helper(new_diagnosis)
 
 
 # Retrieve a student with a matching ID
-async def retrieve_diagnosis_by_name(name: str) -> dict:
-    diagnosis = await diagnosis_collection.find_one({"name": name})
+async def retrieve_diagnosis_standard_by_name(name: str) -> dict:
+    diagnosis = await diagnosis_standard_collection.find_one({"name": name})
     if diagnosis:
-        return diagnosis_helper(diagnosis)
+        return diagnosis_standard_helper(diagnosis)
 
 
 # Update a student with a matching ID
-async def update_diagnosis(id: str, data: dict):
-    # Return false if an empty request body is sent.
-    if len(data) < 1:
-        return False
-    student = await diagnosis_collection.find_one({"_id": ObjectId(id)})
-    if student:
-        diagnosis_student = await diagnosis_collection.update_one(
-            {"_id": ObjectId(id)}, {"$set": data}
-        )
-        if diagnosis_student:
-            return True
-        return False
+# async def update_diagnosis(id: str, data: dict):
+#     # Return false if an empty request body is sent.
+#     if len(data) < 1:
+#         return False
+#     student = await rated_diagnosis_collection.find_one({"_id": ObjectId(id)})
+#     if student:
+#         diagnosis_student = await rated_diagnosis_collection.update_one(
+#             {"_id": ObjectId(id)}, {"$set": data}
+#         )
+#         if diagnosis_student:
+#             return True
+#         return False
 
 
 # Delete a student from the database
-async def delete_diagnosis(id: str):
-    student = await diagnosis_collection.find_one({"_id": ObjectId(id)})
-    if student:
-        await diagnosis_collection.delete_one({"_id": ObjectId(id)})
-        return True
+# async def delete_diagnosis(id: str):
+#     student = await rated_diagnosis_collection.find_one({"_id": ObjectId(id)})
+#     if student:
+#         await rated_diagnosis_collection.delete_one({"_id": ObjectId(id)})
+#         return True
+
+
+if __name__ == '__main__':
+    asyncio.run(add_diagnosis_standard({
+        "name": "Вазомоторный ринит",
+        "speciality": "Ортоларингология",
+        "prescriptions": ["Флюорография легких", "Электрокардиография в покое"]
+    }))
