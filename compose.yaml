@@ -7,17 +7,15 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
       - MONGO_INITDB_ROOT_PASSWORD=bdung
-    ports:
-      - '27017:27017'
+    expose:
+      - '27017'
     volumes:
       - database:/data/db
 
   back:
-    image: m4vdoshin/helper_back
-    volumes:
-      - media:/taxi_ais/media
+    image: m4vdoshin/helper_back:0
     command:
-      python app/main.py
+      python main.py
     ports:
       - "8000:8000"
     depends_on:
@@ -28,4 +26,3 @@ services:
 volumes:
   database:
     driver: local
-  media:

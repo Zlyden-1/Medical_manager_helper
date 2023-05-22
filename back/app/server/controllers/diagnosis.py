@@ -4,7 +4,7 @@ import pytz
 
 from ..database import retrieve_diagnosis_standard_by_name, add_rated_diagnosis, add_diagnosis_standard
 from ..readers import xslx, pdf
-from ..file_builders import docx
+from ..file_builders import word
 
 tz = pytz.timezone('Europe/Moscow')
 OK = 0
@@ -29,7 +29,7 @@ async def rate_prescriptions(name: str, file):
                 if prescription not in standard['prescriptions']:
                     diagnosis['extra_prescriptions'].append(prescription)
         await add_rated_diagnosis(diagnosis)
-    filename = docx.builder(data)
+    filename = word.builder(name, data)
     return data, filename
 
 
