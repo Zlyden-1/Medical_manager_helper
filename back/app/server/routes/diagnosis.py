@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Body, UploadFile, Response
+from fastapi import APIRouter, Body, UploadFile, Response, File
 from fastapi.responses import FileResponse
 from fastapi.encoders import jsonable_encoder
 
@@ -47,13 +47,13 @@ router = APIRouter()
 
 
 @router.post("/upload/protocols", response_description="Protocols uploaded")
-async def upload_protocols(name: str, file: UploadFile) -> List[RatedDiagnosisResponseSchema]:
+async def upload_protocols(name: str, file: UploadFile = File(...)) -> List[RatedDiagnosisResponseSchema]:
     result, filename = await rate_prescriptions(name, file.file)
     return rated_diagnoses_response_model(result, filename)
 
 
 @router.post("/upload/standards", response_description="Standards uploaded")
-async def upload_standards(file: UploadFile):
+async def upload_standards(file: UploadFile = File(...)):
     result = await add_standards(file.file)
     if result:
         return Response({"message": 'Standards uploaded and saved successfully'}, status_code=200)

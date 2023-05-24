@@ -20,15 +20,6 @@ class DiagnosisStandardSchema(BaseModel):
 
 
 class RatedDiagnosisSchema(BaseModel):
-    name: str = Field(...)
-    speciality: str = Field(...)
-    prescriptions: List[str] = Field(...)
-    extra_prescriptions: List[str] = Field(...)
-    code: int = Field(...)
-    doctor_name: str = Field(...)
-    protocol_name: str = Field(...)
-    upload_date: date = Field(...)
-
     class Config:
         schema_extra = {
             "example": {
@@ -45,34 +36,40 @@ class RatedDiagnosisSchema(BaseModel):
 
 
 class RatedDiagnosisResponseSchema(BaseModel):
-    data: List[RatedDiagnosisSchema] = Field(...)
-    filename: str = Field(...)
-
     class Config:
         schema_extra = {
-            "example": {"data": [
+            "example": {"данные": [
                 {
-                    "name": "Вазомоторный ринит",
-                    "speciality": "Ортоларингология",
-                    "prescriptions": ["Флюорография легких", "Электрокардиография в покое"],
-                    "extra_prescriptions": ["Креатинин"],
-                    "code": 2,
-                    "doctor_name": 'Иван Иванович',
-                    "protocol_name": "Ортоларингологическое отделение",
-                    "upload_date": date(1900, 1, 1)
+                    'Пол пациента': 'Муж',
+                    'Дата рождения пациента': date(2000, 1, 1),
+                    'ID пациента': 3,
+                    'Код МКБ-10': 'J32.9',
+                    "Диагноз": "Вазомоторный ринит",
+                    'Дата оказания услуги': date(2000, 1, 1),
+                    'Должность': 'врач-оториноларинголог',
+                    "Назначения": ["Флюорография легких", "Электрокардиография в покое"],
+                    "Лишние назначения": ["Креатинин"],
+                    "Оценка": "Избыточные назначения",
+                    "Источник данных": "Ортоларингологическое_отделение.xlsx",
+                    "Дата загрузки": date(2000, 1, 1)
                 },
                 {
-                    "name": "Вазомоторный ринит",
-                    "speciality": "Ортоларингология",
-                    "prescriptions": ["Флюорография легких", "Электрокардиография в покое"],
-                    "extra_prescriptions": [],
-                    "code": 0,
-                    "doctor_name": 'Иван Петрович',
-                    "protocol_name": "Ортоларингологическое отделение",
-                    "upload_date": date(1900, 2, 1),
+                    'Пол пациента': 'Муж',
+                    'Дата рождения пациента': date(2000, 1, 1),
+                    'ID пациента': 3,
+                    'Код МКБ-10': 'J32.9',
+                    "Диагноз": "Вазомоторный ринит",
+                    'Дата оказания услуги': date(2000, 1, 1),
+                    'Должность': 'врач-оториноларинголог',
+                    "Назначения": ["Флюорография легких", "Электрокардиография в покое"],
+                    "Лишние назначения": [],
+                    "Оценка":"Ок",
+                    "Имя врача": 'Иван Петрович',
+                    "Источник данных": "Ортоларингологическое_отделение.xlsx",
+                    "Дата загрузки": date(2000, 2, 1),
                 }
             ],
-                "filename": "example.docx"
+                "имя файла": "Ортоларингологическое_отделение.docx"
             }
         }
 
@@ -87,7 +84,8 @@ def single_object_response_model(data, message):
 
 def rated_diagnoses_response_model(data: list, filenane):
     return {
-        "data": data,
+        "data": data,        "data": data,
+
         "code": 200,
         "filename": filenane,
     }

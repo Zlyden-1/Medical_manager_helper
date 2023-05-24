@@ -1,7 +1,15 @@
-from openpyexcel import load_workbook
+import re
+
+import pandas as pd
 
 
 def reader(file):
-    contents = await file.read()
-    wb = load_workbook(filename=None, data=contents, read_only=True, data_only=True)
-    return {}
+    data = pd.read_excel(file).to_dict('records')
+    for diagnosis in data:
+        diagnosis['Назначения'] = [i for i in re.split(r'\n+', diagnosis['Назначения']) if i]
+    return data
+
+
+if __name__ == '__main__':
+    with open('../media/Dataset.xlsx', 'rb') as file:
+        print(reader(file))
