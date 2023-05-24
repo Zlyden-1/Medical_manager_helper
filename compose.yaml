@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=bdung
+    expose:
+      - '27017'
+    volumes:
+      - database:/data/db
+
+  back:
+    image: m4vdoshin/helper_back:0
+    command:
+      python main.py
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+
+volumes:
+  database:
+    driver: local
