@@ -17,7 +17,7 @@ async def builder(filename: str, data: List[dict]) -> str:
             row_cells[i].text = str(item[key])
     filename = find_free_filename(filename)
     doc.save(f'../media/{filename}')
-    return ''
+    return f'{filename}'
 
 
 def find_free_filename(base_filename: str):
