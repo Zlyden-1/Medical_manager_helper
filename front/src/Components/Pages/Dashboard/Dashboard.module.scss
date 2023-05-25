@@ -1,5 +1,6 @@
 .wrapper {
-    width: 100%;
+    width: 90%;
+    height: 100%;
 
     .wrapperfilter {
         margin: 20px;
@@ -15,14 +16,45 @@
         }
     }
 
-    .wrapperleft {
-        width: 50%;
-    }
+    .separator {
+        margin: 1%;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        
 
-    .diagram {
-        padding: 1%;
-        width: 600px;
-        height: 350px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        .wrapperleft {
+            flex-basis: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+
+            .button {
+                padding: 1%;
+                background-color: green;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .diagram {
+                padding: 1%;
+                width: 500px;
+                height: 350px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .wrapperright {
+            flex-basis: 50%;
+
+            .diagram {
+                padding: 1%;
+                width: 600px;
+                height: 350px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+        }
+
     }
 }
