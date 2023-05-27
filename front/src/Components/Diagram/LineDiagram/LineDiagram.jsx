@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 ChartJS.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export const LineDiagram = (props) => {
-    const dates = [... new Set(Array.isArray(props.data["данные"]) ? props.data["данные"].map(i => i["Дата оказания услуги"]) : [])];
+    const dates = [... new Set(Array.isArray(props.data) ? props.data.map(i => i["Дата оказания услуги"]) : [])];
     const datasets = [
         {
             label: 'Соответствует стандарту',
@@ -31,9 +31,9 @@ export const LineDiagram = (props) => {
     ]
     for (let i = 0; i < dates.length; i++) {
         const currentDiagnoses = [];
-        for (let j = 0; j < props.data["данные"].length; j++) {
-            if (props.data["данные"][j]["Дата оказания услуги"] == dates[i]) {
-                currentDiagnoses.push(props.data["данные"][j]["Оценка"])
+        for (let j = 0; j < props.data.length; j++) {
+            if (props.data[j]["Дата оказания услуги"] == dates[i]) {
+                currentDiagnoses.push(props.data[j]["Оценка"])
             }
         }
         const countOk = currentDiagnoses.reduce((total, rate) => (rate === 'Ок' ? total + 1 : total), 0);

@@ -12,7 +12,7 @@ export const Table = () => {
 						<tr>
 							{Object.keys(data["данные"][0]).map((key) => {
 								if (key === "Лишние назначения") {
-									return null; // если ключ содержит "Лишние назначения", то пропускаем его
+									return null; 
 								}
 								else {
 									return <th key={key}>{key}</th>
@@ -23,13 +23,13 @@ export const Table = () => {
 					<tbody>
 						{data["данные"].map((dataItem, index) => {
 							const isExcess = dataItem["Лишние назначения"] !== "";
-							const additionalText = isExcess ? "<br><span style='color:red'>" + dataItem["Лишние назначения"] + "</span>" : "";
+							const additionalText = isExcess ? "<br><span style='color:white;font-weight:bold;background-color:red'>" + dataItem["Лишние назначения"] + "</span>" : "";
 							return (
 								<tr key={index}>
-									{Object.keys(dataItem).map((key, index) => {// используем Object.keys, чтобы получить список ключей объекта
+									{Object.keys(dataItem).map((key, index) => {
 										const value = dataItem[key];
 										if (key === "Лишние назначения") {
-											return null; // если ключ содержит "Лишние назначения", то пропускаем его
+											return null; 
 										} else if (Array.isArray(value)) {
 											const text = value.join(",<br>") + additionalText;
 											return <td className={s.rows} key={index} dangerouslySetInnerHTML={{ __html: text }} />;

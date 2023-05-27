@@ -4,17 +4,21 @@
     .table {
         margin: 0;
         padding: 0;
+        width: 100%;
         border-collapse: collapse;
         text-align: center;
         height: 1%;
         table-layout: fixed;
 
         & th,
-        & td {
+        & td,
+        & tr {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
             vertical-align: middle;
+            text-overflow: ellipsis;
+            word-break: break-word; 
         }
 
         & th {
@@ -27,6 +31,11 @@
 
         & tr:hover {
             background-color: #ddd;
+        }
+        .attention{
+            font-weight: bold;
+            background-color: red;
+            color: white;
         }
     }
 }
