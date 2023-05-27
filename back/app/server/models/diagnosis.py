@@ -5,10 +5,6 @@ from pydantic import BaseModel, Field
 
 
 class DiagnosisStandardSchema(BaseModel):
-    name: str = Field(...)
-    speciality: str = Field(...)
-    prescriptions: List[str] = Field(...)
-
     class Config:
         schema_extra = {
             "example": {
@@ -84,8 +80,7 @@ def single_object_response_model(data, message):
 
 def rated_diagnoses_response_model(data: list, filenane):
     return {
-        "data": data,        "data": data,
-
+        "data": data,
         "code": 200,
         "filename": filenane,
     }

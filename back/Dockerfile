@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.10
 LABEL authors="AntiVNSH-team"
 
 COPY requirements.txt /

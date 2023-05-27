@@ -2,14 +2,17 @@ anyio==3.6.2
 attrs==22.1.0
 build==0.10.0
 CacheControl==0.12.11
+camelot-py==0.9.0
 certifi==2022.9.24
 cffi==1.15.1
+chardet==5.1.0
 charset-normalizer==2.1.1
 cleo==2.0.1
 click==8.1.3
 crashtest==0.4.1
 cryptography==37.0.4
 distlib==0.3.6
+distro==1.8.0
 dnspython==2.3.0
 dulwich==0.21.3
 email-validator==2.0.0.post2
@@ -32,9 +35,12 @@ more-itertools==8.14.0
 motor==3.1.2
 msgpack==1.0.4
 numpy==1.24.3
+opencv-python==4.7.0.72
 openpyexcel==2.5.14
+openpyxl==3.1.2
 packaging==22.0
 pandas==2.0.1
+pdfminer.six==20221105
 pexpect==4.8.0
 pipenv==2023.4.29
 pkginfo==1.9.6
@@ -46,6 +52,7 @@ ptyprocess==0.7.0
 pycparser==2.21
 pydantic==1.10.7
 pymongo==4.3.3
+PyPDF2==3.0.1
 pyproject_hooks==1.0.0
 pyrsistent==0.18.1
 python-dateutil==2.8.2
@@ -62,6 +69,7 @@ shellingham==1.5.0
 six==1.16.0
 sniffio==1.3.0
 starlette==0.27.0
+tabula-py==2.7.0
 tomli==2.0.1
 tomlkit==0.11.5
 trove-classifiers==2022.12.22
@@ -70,8 +78,6 @@ tzdata==2023.3
 urllib3==1.26.12
 uvicorn==0.22.0
 uvloop==0.17.0
-virtualenv==20.16.5
-virtualenv-clone==0.5.7
 watchfiles==0.19.0
 webencodings==0.5.1
 websockets==11.0.3
