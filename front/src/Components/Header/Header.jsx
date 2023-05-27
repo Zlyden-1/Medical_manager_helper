@@ -14,6 +14,9 @@ export const Header = () => {
             case '/dashboard':
                 setPageTitle('Дашборды');
                 break;
+            case '/table':
+                setPageTitle('Таблица с результатами');
+                break;
             default:
                 setPageTitle('Загрузить файл для анализа');
         }

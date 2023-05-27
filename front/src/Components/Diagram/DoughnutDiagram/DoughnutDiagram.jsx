@@ -10,6 +10,7 @@ export const DoughnutDiagram = (props) => {
 	const countOk= rates.reduce((total, rate) => (rate === 'Ок' ? total + 1 : total), 0);
 	const countLack= rates.reduce((total, rate) => (rate === 'Недостаточные назначения' ? total + 1 : total), 0);
 	const countOver= rates.reduce((total, rate) => (rate === 'Избыточные назначения' ? total + 1 : total), 0);
+	
 	const data = {
 		labels: ['Соответствует стандарту', 'Доп. назначения', 'Недостаточные назначения'],
 		datasets: [

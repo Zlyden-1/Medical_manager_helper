@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Dashboard } from '../Dashboard/Dashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import s from './MainPage.module.scss'
 
 export const MainPage = () => {
 	const [file, setFile] = useState(null);
 	const [name, setName] = useState("");
-	const [data, setData] = useState("");
+	const dispatch = useDispatch();
+	const data = useSelector(state => state.data);
+	console.log(data);
 
 	const handleFileChange = e => {
 		setFile(e.target.files[0]);
@@ -13,7 +16,9 @@ export const MainPage = () => {
 	const handleNameChange = event => {
 		setName(event.target.value);
 	}
-
+	const setData = (data) => {
+		dispatch({type:'SET_MAIN_PAGE_DATA', payload: data});
+	}
 	const handleSubmit = async e => {
 		e.preventDefault();
 
@@ -27,34 +32,21 @@ export const MainPage = () => {
 					'Content-Type': 'multipart/form-data'
 				}
 			});
-
 			setData(response.data);
+
 		} catch (error) {
-			console.error(error.response.data);
-			console.log(error.response.data.detail);
-		}
-		return <Dashboard data={data} />;
+			console.error(error.response);
+			console.log(error.response);
+		};
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<input type="text" value={name} onChange={handleNameChange} />
-				<input type="file" onChange={handleFileChange} accept='.xlsx' />
-				<button type="submit">Загрузить файл</button>
-			</form>
-			{data && (
-				<div>
-					<h2>Данные из файла:</h2>
-					<ul>
-						<div>
-							{Object.keys(data["данные"][0]).map((key) => (
-								<div>{key}</div>
-							))}
-						</div>
-					</ul>
-				</div>
-			)}
-		</div>
+			<div className={s.wrapper}>
+				<form onSubmit={handleSubmit}>
+					<input type="text" value={name} onChange={handleNameChange} />
+					<input type="file" onChange={handleFileChange} accept='.xlsx' />
+					<button type="submit">Загрузить файл</button>
+				</form>
+			</div>
 	);
 }

@@ -1,6 +1,7 @@
 .wrapper {
     width: 90%;
     height: 100%;
+    margin-top: 8%;
 
     .wrapperfilter {
         margin: 20px;
@@ -13,6 +14,10 @@
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             padding: 5px;
             border-radius: 7px;
+            .icon{
+                vertical-align: middle;
+            }
+
         }
     }
 

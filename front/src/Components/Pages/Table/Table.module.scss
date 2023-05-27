@@ -1,0 +1,32 @@
+.wrapper {
+    margin-top: 8%;
+
+    .table {
+        margin: 0;
+        padding: 0;
+        border-collapse: collapse;
+        text-align: center;
+        height: 1%;
+        table-layout: fixed;
+
+        & th,
+        & td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        & th {
+            background-color: #f2f2f2;
+        }
+
+        & tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        & tr:hover {
+            background-color: #ddd;
+        }
+    }
+}
