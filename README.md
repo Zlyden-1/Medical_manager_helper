@@ -8,3 +8,20 @@
   * ограничения: 
    * структура файла должна совпадать со структурой приказа с сайта МинЗдрава
    * Считывается небольшой фргмент документа (в будущем возможно развития до считывания всех назначений и других параметров
+## Технологии
+### Frontend-разработка:
+React.js
+Javascript
+Redux
+### Backend-разработка:
+Python
+FastAPI
+Pandas
+MongoDB
+## Демо
+### Главная страница:
+![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/59503ca1-38a3-4a91-8473-110476bde3c4)
+### Страница анализа на корректность назначений на основе .xlsx файла:
+![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/2ebb3372-4902-4bed-8c0b-062198e026ee)
+### Страница с таблицей, хранящая данные из .xlsx файла:
+![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/2952998b-3771-4d12-97f7-10a20cb23db4)
