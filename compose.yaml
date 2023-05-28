@@ -13,7 +13,7 @@ services:
       - database:/data/db
 
   back:
-    image: m4vdoshin/helper_back:0
+    image: m4vdoshin/helper_back:test
     command:
       python main.py
     ports:

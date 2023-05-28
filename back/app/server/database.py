@@ -3,7 +3,7 @@ import asyncio
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 
-MONGO_DETAILS = "mongodb://127.0.0.1:27017"
+MONGO_DETAILS = "mongodb://mongodb:27017"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
@@ -67,6 +67,12 @@ async def add_diagnosis_standard(diagnosis_data: dict) -> dict:
 
 async def retrieve_diagnosis_standard_by_id(id: str) -> dict:
     diagnosis = await diagnosis_standard_collection.find_one({"_id": ObjectId(id)})
+    if diagnosis:
+        return diagnosis_standard_helper(diagnosis)
+
+
+async def retrieve_diagnosis_standard_by_name(name: str) -> dict:
+    diagnosis = await diagnosis_standard_collection.find_one({"name": name})
     if diagnosis:
         return diagnosis_standard_helper(diagnosis)
 
