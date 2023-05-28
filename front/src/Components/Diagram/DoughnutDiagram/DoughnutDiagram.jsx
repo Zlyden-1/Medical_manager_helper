@@ -1,8 +1,8 @@
 import React from 'react'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend, Title)
 
 
 export const DoughnutDiagram = (props) => {
@@ -39,7 +39,14 @@ export const DoughnutDiagram = (props) => {
 				labels: {
 					usePointStyle: true //for style circle
 				}
-			}
+			},
+			title: {
+                display: true,
+                text: 'Динамика корректности диагнозов',
+                font:{
+                    size: 16
+                }
+            },
 		}
 	};
 	return <Doughnut options={options} data={data} />

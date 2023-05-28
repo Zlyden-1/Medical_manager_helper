@@ -17,6 +17,9 @@ export const Header = () => {
             case '/table':
                 setPageTitle('Таблица с результатами');
                 break;
+            case '/standarts':
+                setPageTitle('Стандартные назначения');
+                break;
             default:
                 setPageTitle('Загрузить файл для анализа');
         }

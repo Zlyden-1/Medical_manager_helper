@@ -24,9 +24,8 @@ export const LineDiagram = (props) => {
         {
             label: 'Недостаточные назначения',
             data: [],
-            borderColor: 'rgb(36, 212, 52)',
-            backgroundColor: 'rgba(36, 212, 52, 0.5)',
-
+            borderColor: 'rgba(255, 206, 86)',
+            backgroundColor: 'rgba(255, 206, 86, 0.5)',
         },
     ]
     for (let i = 0; i < dates.length; i++) {
@@ -55,7 +54,10 @@ export const LineDiagram = (props) => {
             },
             title: {
                 display: true,
-                text: 'Chart.js Line Chart',
+                text: 'Динамика корректности диагнозов',
+                font:{
+                    size: 14
+                }
             },
         },
     };

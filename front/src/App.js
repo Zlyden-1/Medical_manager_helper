@@ -7,6 +7,7 @@ import { Dashboard } from './Components/Pages/Dashboard/Dashboard';
 import { Table } from './Components/Pages/Table/Table';
 import { Provider } from 'react-redux';
 import store from './redux/main-reducer'
+import { StandartPage } from './Components/Pages/StandartPage/StandartPage';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
               <Route path="/" element={<MainPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/table" element={<Table/>} />
+              <Route path="/standarts" element={<StandartPage/>} />
             </Routes>
           </div>
         </Provider>
