@@ -10,14 +10,14 @@
    * Считывается небольшой фргмент документа (в будущем возможно развития до считывания всех назначений и других параметров
 ## Технологии
 ### Frontend-разработка:
-React.js
-Javascript
-Redux
+* React.js
+* Javascript
+* Redux
 ### Backend-разработка:
-Python
-FastAPI
-Pandas
-MongoDB
+* Python
+* FastAPI
+* Pandas
+* MongoDB
 ## Демо
 ### Главная страница:
 ![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/59503ca1-38a3-4a91-8473-110476bde3c4)
