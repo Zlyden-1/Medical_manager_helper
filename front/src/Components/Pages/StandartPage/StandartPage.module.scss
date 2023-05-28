@@ -1,0 +1,58 @@
+
+.wrapper {
+    padding: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: auto auto 30% auto;
+  }
+  .title{
+    font-size: 16px;
+    font-weight: 600;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  form {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .beginform{
+      margin-top: 20px;
+    }
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  button[type="submit"] {
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: #479CA3;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #005bbf;
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }

@@ -1,0 +1,39 @@
+.wrapper {
+    .table {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        height: 1%;
+        table-layout:initial;
+
+        & th,
+        & td,
+        & tr {
+            border: 1px solid #8d8d8d;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+            text-overflow: ellipsis;
+            word-break:keep-all; 
+        }
+
+        & th {
+            background-color: #f2f2f2;
+        }
+
+        & tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        & tr:hover {
+            background-color: #ddd;
+        }
+        .attention{
+            font-weight: bold;
+            background-color: red;
+            color: white;
+        }
+    }
+}
