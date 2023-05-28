@@ -17,9 +17,9 @@ diagnosis_standard_collection = database.get_collection("diagnosis_standard_coll
 def diagnosis_standard_helper(diagnosis) -> dict:
     return {
         "id": str(diagnosis["_id"]),
-        "name": diagnosis["name"],
-        "speciality": diagnosis["speciality"],
-        "prescriptions": diagnosis["prescriptions"],
+        "Диагноз": diagnosis["Диагноз"],
+        "Направление": diagnosis["Направление"],
+        "Назначения": diagnosis["Назначения"],
     }
 
 
@@ -65,12 +65,16 @@ async def add_diagnosis_standard(diagnosis_data: dict) -> dict:
     return diagnosis_standard_helper(new_diagnosis)
 
 
-# Retrieve a student with a matching ID
+async def retrieve_diagnosis_standard_by_id(id: str) -> dict:
+    diagnosis = await diagnosis_standard_collection.find_one({"_id": ObjectId(id)})
+    if diagnosis:
+        return diagnosis_standard_helper(diagnosis)
+
+
 async def retrieve_diagnosis_standard_by_name(name: str) -> dict:
     diagnosis = await diagnosis_standard_collection.find_one({"name": name})
     if diagnosis:
         return diagnosis_standard_helper(diagnosis)
-
 
 # Update a student with a matching ID
 # async def update_diagnosis(id: str, data: dict):
@@ -87,17 +91,18 @@ async def retrieve_diagnosis_standard_by_name(name: str) -> dict:
 #         return False
 
 
-# Delete a student from the database
-# async def delete_diagnosis(id: str):
-#     student = await rated_diagnosis_collection.find_one({"_id": ObjectId(id)})
-#     if student:
-#         await rated_diagnosis_collection.delete_one({"_id": ObjectId(id)})
-#         return True
+async def delete_diagnosis_standard(id: str):
+    diagnosis = await diagnosis_standard_collection.find_one({"_id": ObjectId(id)})
+    if diagnosis:
+        await diagnosis_standard_collection.delete_one({"_id": ObjectId(id)})
+        return True
 
 
 if __name__ == '__main__':
-    asyncio.run(add_diagnosis_standard({
-        "name": "Вазомоторный ринит",
-        "speciality": "Ортоларингология",
-        "prescriptions": ["Флюорография легких", "Электрокардиография в покое"]
-    }))
+    # asyncio.run(add_diagnosis_standard({
+    #     "Диагноз": "Перенесенный в прошлом инфаркт миокарда",
+    #     "Направление": "Кардиология",
+    #     "Назначения": ["Эхокардиография", "Креатинин"]
+    # }))
+    # asyncio.run(delete_diagnosis('646e3212f676d426cbf608f3'))
+    print(asyncio.run(retrieve_diagnosis_standards()))
