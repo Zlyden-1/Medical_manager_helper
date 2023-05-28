@@ -5,7 +5,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex-shrink: 0;
   padding: 2%;
   gap: 10%;
 
@@ -14,8 +14,10 @@
     background-color: white;
     padding: 10%;
     width: 80%;
-    height: 4%;
     border-radius: 32px;
+    position: relative;
+    flex-shrink: 0;
+    height: 4%;
   }
 
 
@@ -44,6 +46,6 @@
   .pointer {
     text-decoration: none;
     color: white;
-    padding-top: 15%;
+    padding-top: 10px;
   }
 }

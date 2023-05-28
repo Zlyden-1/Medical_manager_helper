@@ -78,11 +78,14 @@
         margin: 1%;
         display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: center;
         gap: 20px;
 
 
         .wrapperleft {
             flex-basis: 50%;
+            align-self: start;
             display: flex;
             flex-direction: column;
             gap: 15px;
