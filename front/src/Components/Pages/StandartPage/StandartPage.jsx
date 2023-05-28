@@ -34,9 +34,9 @@ export const StandartPage = () => {
     formData.append('age', age);
     formData.append('standart', standart);
     formData.append('file', file);
-    
+
     try {
-      const response = await axios.post('http://178.170.197.106/diagnoses/upload/standarts', formData, {
+      const response = await axios.post('http://178.170.197.106:8000/diagnoses/upload/standarts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -52,8 +52,16 @@ export const StandartPage = () => {
 
   return (
     <div className={s.wrapper}>
+      <div className={s.title}>
+        Выгруженные стандарты:
+        <div>Стандарт1</div>
+        <div>Стандарт2</div>
+        <div>Стандарт3</div>
+        <div>Стандарт4</div>
+      </div>
       <form onSubmit={handleSubmit}>
-        <div>Диагноз:</div>
+      <div className={s.title}>Добавление стандарта:</div>
+        <div className={s.beginform}>Диагноз:</div>
         <input type="text" value={diagnosis} required onChange={handleDiagnosisChange} />
         <div>Направление:</div>
         <input type="text" value={direction} required onChange={handleDirectionChange} />
@@ -62,7 +70,7 @@ export const StandartPage = () => {
         <div>Стандарт:</div>
         <input type="text" value={standart} required onChange={handleStandartChange} />
         <input type="file" title=" " required onChange={handleFileChange} accept='.xlsx' />
-        <button type="submit">Загрузить файл</button>
+        <button type="submit">Выгрузить стандарт</button>
       </form>
     </div>
   );

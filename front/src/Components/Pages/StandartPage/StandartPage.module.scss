@@ -1,3 +1,4 @@
+
 .wrapper {
     padding: 40px;
     background-color: white;
@@ -5,8 +6,17 @@
     flex-direction: column;
     margin: auto auto 30% auto;
   }
-  
+  .title{
+    font-size: 16px;
+    font-weight: 600;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
   form {
+    margin-top: 20px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 4px;
@@ -14,6 +24,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .beginform{
+      margin-top: 20px;
+    }
   }
   
   input[type="text"],

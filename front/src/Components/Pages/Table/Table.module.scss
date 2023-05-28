@@ -6,17 +6,17 @@
         border-collapse: collapse;
         text-align: center;
         height: 1%;
-        table-layout: fixed;
+        table-layout:initial;
 
         & th,
         & td,
         & tr {
-            border: 1px solid #ddd;
+            border: 1px solid #8d8d8d;
             padding: 8px;
             text-align: center;
             vertical-align: middle;
             text-overflow: ellipsis;
-            word-break: break-word; 
+            word-break:keep-all; 
         }
 
         & th {

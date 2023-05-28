@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import s from './Dashboard.module.scss'
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { LineDiagram } from '../../Diagram/LineDiagram/LineDiagram';
 import { DoughnutDiagram } from '../../Diagram/DoughnutDiagram/DoughnutDiagram';
 import { AiOutlineDown } from 'react-icons/ai'
+import { HorizontalDiagram } from '../../Diagram/HorizontalDiagram/HorizontalDiagram';
 
 
 export const Dashboard = () => {
@@ -15,7 +17,24 @@ export const Dashboard = () => {
 	const toggleFilter1 = () => {
 		setFilter1Open(filter1Open => !filter1Open);
 	}
-
+	const handleDownloadFile = () => {
+		const url = "http://178.170.197.106:8000/diagnoses/download/";
+		const filename = data['имя файла'];
+		const queryAdress = url + filename;
+		axios.get(queryAdress, { responseType: "blob" })
+			.then(response => {
+				const url = URL.createObjectURL(new Blob([response.data]));
+				const link = document.createElement("a");
+				link.href = url;
+				link.download = "file.docx";
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 	const handlePostChange = (e) => {
 		const post = e.target.value;
 		if (e.target.checked) {
@@ -65,7 +84,7 @@ export const Dashboard = () => {
 						<NavLink to='/table' className={s.buttonone}>
 							Посмотреть таблицу с результатами анализа
 						</NavLink>
-						<button className={s.buttontwo}>
+						<button className={s.buttontwo} onClick={handleDownloadFile}>
 							Скачать таблицу с результатами анализа
 						</button>
 						<div className={s.diagram}>
@@ -75,6 +94,9 @@ export const Dashboard = () => {
 					<div className={s.wrapperright}>
 						<div className={s.diagram}>
 							<DoughnutDiagram data={filteredData.length > 0 ? filteredData : data['данные']} />
+						</div>
+						<div className={s.diagram}>
+							<HorizontalDiagram data={filteredData.length > 0 ? filteredData : data['данные']} />
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import s from './LineDiagram.module.scss'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -11,15 +10,14 @@ export const LineDiagram = (props) => {
         {
             label: 'Соответствует стандарту',
             data: [],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgb(53, 162, 235)',
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
         {
             label: 'Доп. назначения',
             data: [],
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
         {
             label: 'Недостаточные назначения',
@@ -45,6 +43,11 @@ export const LineDiagram = (props) => {
 
     const options = {
         responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        },
         plugins: {
             legend: {
                 position: 'bottom',
@@ -54,7 +57,7 @@ export const LineDiagram = (props) => {
             },
             title: {
                 display: true,
-                text: 'Динамика корректности диагнозов',
+                text: 'График изменения корректности диагнозов',
                 font:{
                     size: 14
                 }

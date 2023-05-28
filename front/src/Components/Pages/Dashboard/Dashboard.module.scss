@@ -103,6 +103,7 @@
             .buttontwo {
                 @extend .buttonone;
                 background-color: #479CA3;
+                cursor: pointer;
             }
 
             .diagram {
