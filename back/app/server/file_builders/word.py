@@ -29,7 +29,6 @@ def translate_table_columns(table):
         original_text = cell.text
         if original_text in translation_dict:
             cell.text = translation_dict[original_text]
-    # return table
 
 
 async def builder(filename: str, data: List[dict]) -> str:
@@ -39,7 +38,7 @@ async def builder(filename: str, data: List[dict]) -> str:
     doc.sections[0].page_width = Inches(11.69)
     doc.sections[0].page_height = Inches(8.27)
 
-    table = doc.add_table(rows=1, cols=len(data[0]), )
+    table = doc.add_table(rows=1, cols=len(data[0]) + 1, )
     heading_cells = table.rows[0].cells
     table.style = 'Table Grid'
     for column in table.columns:
@@ -49,6 +48,9 @@ async def builder(filename: str, data: List[dict]) -> str:
         if key != 'code' and key != 'extra_prescriptions':
             heading_cells[i].text = key
             heading_cells[i].paragraphs[0].alignment = 1
+
+    heading_cells[8].text = 'Оценка'
+
     for item in data:
         row_cells = table.add_row().cells
         for i, key in enumerate(item.keys()):
@@ -67,14 +69,15 @@ async def builder(filename: str, data: List[dict]) -> str:
                     nested_cell.text = '\n'.join(item[key])
                     nested_cell.paragraphs[0].runs[0].font.color.rgb = RGBColor(255, 0, 0)
                     nested_cell.paragraphs[0].runs[0].bold = True
-                else:
-                    ...
+                row_cells[8].text = 'Избыточные назначения'
+                row_cells[8].paragraphs[0].runs[0].font.color.rgb = RGBColor(255, 0, 0)
             else:
                 if key != 'code':
                     if type(item[key]) == list:
                         row_cells[i].text = '\n'.join(item[key])
                     else:
                         row_cells[i].text = str(item[key])
+                row_cells[8].text = 'Ок'
 
     # удаляем ячейки в четвертом и пятом столбцах
     for row in table.rows:
