@@ -13,6 +13,7 @@ services:
       - database:/data/db
 
   back:
+    container_name: back
     image: m4vdoshin/helper_back:test
     command:
       python main.py
@@ -22,6 +23,17 @@ services:
       - mongodb
     links:
       - mongodb
+      
+  nginx:
+    container_name: front
+    image: m4vdoshin/helper_front
+    ports: 
+      - "80:80"
+    depends_on: 
+      - back
+    links: 
+      - back
+    restart: always
 
 volumes:
   database:

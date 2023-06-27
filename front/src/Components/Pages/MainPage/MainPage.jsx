@@ -28,7 +28,7 @@ export const MainPage = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://178.170.197.106:8000/diagnoses/upload/protocols', formData, {
+      const response = await axios.post('http://localhost:8000/api/diagnoses/upload/protocols', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -18,7 +18,7 @@ export const Dashboard = () => {
 		setFilter1Open(filter1Open => !filter1Open);
 	}
 	const handleDownloadFile = () => {
-		const url = "http://178.170.197.106:8000/diagnoses/download/";
+		const url = "http://back:8000/api/diagnoses/download/";
 		const filename = data['имя файла'];
 		const queryAdress = url + filename;
 		axios.get(queryAdress, { responseType: "blob" })
