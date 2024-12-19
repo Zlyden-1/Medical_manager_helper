@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   mongodb:
-    image: mongo
+    image: mongo:7-jammy
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
@@ -14,9 +12,8 @@ services:
 
   back:
     container_name: back
-    image: m4vdoshin/helper_back:test
-    command:
-      python main.py
+    build: back/.
+    command: python main.py
     ports:
       - "8000:8000"
     depends_on:
@@ -26,7 +23,7 @@ services:
       
   nginx:
     container_name: front
-    image: m4vdoshin/helper_front
+    image: m4vdoshin/helper_front:test
     ports: 
       - "80:80"
     depends_on: 

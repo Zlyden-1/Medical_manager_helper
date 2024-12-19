@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, Request
 
-from server.routes.diagnosis import router as StudentRouter
+from app.server.routes.diagnosis import router as StudentRouter
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.background import BackgroundTask
 from starlette.types import Message
