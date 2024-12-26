@@ -1,14 +1,21 @@
 services:
-  mongodb:
-    image: mongo:7-jammy
-    restart: always
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-      - MONGO_INITDB_ROOT_PASSWORD=bdung
-    expose:
-      - '27017'
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-      - database:/data/db
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+    restart: always
 
   back:
     container_name: back
@@ -17,9 +24,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - mongodb
-    links:
-      - mongodb
+      postgres:
+        condition: service_healthy
       
   nginx:
     container_name: front
