@@ -69,6 +69,9 @@ watchfiles = "^0.24.0"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.36"}
 asyncpg = "^0.30.0"
 pydantic-settings = "^2.7.0"
+redis = "^5.2.1"
+pyjwt = "^2.10.1"
+alembic = "^1.14.0"
 
 
 [build-system]

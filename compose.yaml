@@ -17,27 +17,69 @@ services:
       retries: 30
     restart: always
 
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_USER=${REDIS_USER}
+      - REDIS_USER_PASSWORD=${REDIS_USER_PASSWORD}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    command: >
+      sh -c '
+        mkdir -p /usr/local/etc/redis &&
+        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
+        echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
+        echo "user default on nopass ~* +@all" > /usr/local/etc/redis/users.acl &&
+        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* +@all" >> /usr/local/etc/redis/users.acl &&
+        redis-server /usr/local/etc/redis/redis.conf --aclfile /usr/local/etc/redis/users.acl
+      '
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
+
   back:
     container_name: back
     build: back/.
-    command: python main.py
+    environment:
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - REDIS_USER_PASSWORD=${REDIS_USER_PASSWORD}
+      - REDIS_USER=${REDIS_USER}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - REDIS_PORT=${REDIS_PORT}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - REDIS_HOST=${REDIS_HOST}
+    command: uvicorn src.api.rest.main:app --host ${APP_HOST} --port ${APP_PORT}
     ports:
-      - "8000:8000"
+      - ${APP_PORT}:${APP_PORT}
     depends_on:
       postgres:
         condition: service_healthy
       
-  nginx:
-    container_name: front
-    image: m4vdoshin/helper_front:test
-    ports: 
-      - "80:80"
-    depends_on: 
-      - back
-    links: 
-      - back
-    restart: always
+#  nginx:
+#    container_name: front
+#    image: m4vdoshin/helper_front:test
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - back
+#    links:
+#      - back
+#    restart: always
 
 volumes:
-  database:
+  postgres:
     driver: local
