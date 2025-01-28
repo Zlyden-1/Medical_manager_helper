@@ -26,7 +26,6 @@ class UserAdmin(ModelView, model=UserModel):
     ]
 
     column_list = [
-        UserModel.id,
         UserModel.email,
         UserModel.first_name,
         UserModel.surname,
