@@ -62,6 +62,10 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - POSTGRES_HOST=${POSTGRES_HOST}
       - REDIS_HOST=${REDIS_HOST}
+      - ADMIN_SUPERUSER_LOGIN={ADMIN_SUPERUSER_LOGIN}
+      - ADMIN_SUPERUSER_PASSWORD={ADMIN_SUPERUSER_PASSWORD}
+      - ADMIN_SECRET={ADMIN_SECRET}
+      - ADMIN_SESSION_TTL_SEC={ADMIN_SESSION_TTL_SEC}
     command: uvicorn src.api.rest.main:app --host ${APP_HOST} --port ${APP_PORT}
     ports:
       - ${APP_PORT}:${APP_PORT}
