@@ -9,7 +9,7 @@ from pydantic import SecretStr
 from starlette.requests import Request
 
 from src.config.auth import AUTH_CONFIG
-from src.database.redis.depends import get_redis_session
+from src.database.redis.depends import get_api_redis_session
 from src.database.postgres.depends import get_session
 from src.domain.authentication.dal import AuthenticationDAO
 from src.domain.authentication.dto import UserSignInDTO, AccessTokenDTO, RefreshTokenDTO
@@ -118,7 +118,7 @@ def check_access(
 async def check_refresh(
         refresh_bearer_token: refresh_bearer_depends,
         refresh_cookies_token: refresh_cookies_depends,
-        redis_session: get_redis_session
+        redis_session: get_api_redis_session
 ) -> RefreshTokenDTO:
     if refresh_bearer_token is not None:
         refresh_token = refresh_bearer_token.credentials
@@ -148,7 +148,7 @@ async def update_tokens(
         response: Response,
         refresh_bearer_token: refresh_bearer_depends,
         refresh_cookies_token: refresh_cookies_depends,
-        redis_session: get_redis_session
+        redis_session: get_api_redis_session
 ) -> AccessTokenDTO:
     refresh_payload = await check_refresh(refresh_bearer_token, refresh_cookies_token, redis_session)
     access_payload = await create_tokens(response, refresh_payload.user_id, redis_session)
@@ -158,7 +158,7 @@ async def update_tokens(
 async def create_tokens(
     response: Response,
     user_id: UUID,
-    redis_session: get_redis_session
+    redis_session: get_api_redis_session
 ) -> AccessTokenDTO:
     refresh_token = await AuthenticationDAO(redis_session).create_refresh_token(user_id)
     response.set_cookie(
@@ -181,7 +181,7 @@ async def create_tokens(
 async def delete_tokens(
         request: Request,
         response: Response,
-        redis_session: get_redis_session
+        redis_session: get_api_redis_session
 ):
     refresh_token = request.cookies.get(AUTH_CONFIG.refresh_key)
     if refresh_token is not None:

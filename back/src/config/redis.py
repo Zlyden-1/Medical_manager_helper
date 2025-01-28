@@ -10,7 +10,7 @@ class RedisConfig(BaseSettings):
     user: str = 'default'
     user_password: str = 'password'
     api_index: int = 1
-    bot_index: int = 2
+    admin_index: int = 2
     encoding: str = 'utf8'
     decode_responses: bool = True
 

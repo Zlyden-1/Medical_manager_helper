@@ -8,12 +8,13 @@ from src.utils.generator import sleep_generator
 from src.utils.time import get_now_with_delta
 
 
-REDIS_CONNECTION = aioredis.from_url(**REDIS_CONFIG.get_redis_attributes(REDIS_CONFIG.api_index))
+API_REDIS_CONNECTION = aioredis.from_url(**REDIS_CONFIG.get_redis_attributes(REDIS_CONFIG.api_index))
+ADMIN_REDIS_CONNECTION = aioredis.from_url(**REDIS_CONFIG.get_redis_attributes(REDIS_CONFIG.admin_index))
 
 
 class RedisSession:
-    def __init__(self):
-        self.connection = REDIS_CONNECTION
+    def __init__(self, connection: aioredis.Redis):
+        self.connection = connection
 
     async def get_keys(self, pattern: str = '*') -> List[str]:
         return [key async for key in sleep_generator(await self.connection.keys(pattern=pattern))]

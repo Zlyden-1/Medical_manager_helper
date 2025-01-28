@@ -47,7 +47,7 @@ opencv-python = "^4.10.0.84"
 openpyexcel = "^2.5.14"
 openpyxl = "^3.1.5"
 pandas = "^2.2.3"
-pdfminer-six = "^20240706"
+pdfminer-six = "20231228"
 pexpect = "^4.9.0"
 pypdf2 = "^3.0.1"
 python-docx = "^1.1.2"
@@ -72,6 +72,8 @@ pydantic-settings = "^2.7.0"
 redis = "^5.2.1"
 pyjwt = "^2.10.1"
 alembic = "^1.14.0"
+pdfplumber = "^0.11.5"
+sqladmin = {extras = ["full"], version = "^0.20.1"}
 
 
 [build-system]

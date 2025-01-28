@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from starlette import status
 from starlette.responses import Response
 
-from src.database.redis.depends import get_redis_session
+from src.database.redis.depends import get_api_redis_session
 from src.domain.authentication.depends import validate_user_credentials_depends, delete_tokens_depends, \
     update_tokens_depends
 from src.domain.authentication.service import create_tokens
@@ -20,7 +20,7 @@ auth_rest_v1 = APIRouter(
 async def sign_up(
         response: Response,
         user: user_create_depends,
-        redis_session: get_redis_session
+        redis_session: get_api_redis_session
 ):
     await create_tokens(response, user.id, redis_session)
 
@@ -32,7 +32,7 @@ async def sign_up(
 async def sign_in(
         response: Response,
         user: validate_user_credentials_depends,
-        redis_session: get_redis_session
+        redis_session: get_api_redis_session
 ):
     await create_tokens(response, user.id, redis_session)
 
