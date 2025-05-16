@@ -25,7 +25,7 @@
 ### Страница анализа на корректность назначений на основе .xlsx файла:
 ![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/2ebb3372-4902-4bed-8c0b-062198e026ee)
 ### Страница с таблицей, хранящая данные из .xlsx файла:
-![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/2952998b-3771-4d12-97f7-10a20cb23db4
+![image](https://github.com/Zlyden-1/Medical_manager_helper/assets/118106046/2952998b-3771-4d12-97f7-10a20cb23db4)
 ### Развертывание 
 * Frontend
 склонировать с github, запустить с помощью npm
